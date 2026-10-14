@@ -1,0 +1,13 @@
+# ── Backend (FastAPI inference service) ──
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+numpy>=1.26
+tensorflow>=2.16     # includes Keras 3, needed to load the .keras model
+
+# ── Training notebook (only needed to retrain) ──
+pandas>=2.0
+seaborn>=0.13
+matplotlib>=3.8
+scikit-learn>=1.4
+datasets>=2.18       # Hugging Face, loads dair-ai/emotion

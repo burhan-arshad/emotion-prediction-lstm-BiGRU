@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Moodline — Burhan Arshad | AI & Machine Learning</title>
+
+  <meta
+    name="description"
+    content="Moodline is an emotion detection application built by Burhan Arshad using a BiGRU deep learning model."
+  >
+  <meta name="author" content="Burhan Arshad">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" id="statusDot" aria-hidden="true"></span>
+        <span class="brand-name">Moodline</span>
+      </div>
+
+      <div class="header-info">
+        <p class="brand-tag">An instrument that reads the mood inside a sentence</p>
+        <p class="creator">BUILT BY <strong>BURHAN ARSHAD</strong></p>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="intro" aria-label="Project introduction">
+        <span class="intro-label">
+          <span class="intro-line"></span>
+          AI & MACHINE LEARNING PROJECT
+        </span>
+
+        <h1>
+          Words carry<br>
+          <span>emotion.</span>
+        </h1>
+
+        <p class="intro-description">
+          Hey, I'm <strong>Burhan Arshad</strong>, a Computer Science student
+          passionate about AI and Machine Learning. I built Moodline to explore
+          how deep learning can recognize emotions hidden inside everyday text.
+        </p>
+
+        <div class="intro-meta">
+          <span class="meta-item">
+            <span class="meta-dot"></span>
+            DEEP LEARNING
+          </span>
+
+          <span class="meta-divider">/</span>
+
+          <span class="meta-item">BiGRU NEURAL NETWORK</span>
+
+          <span class="meta-divider">/</span>
+
+          <span class="meta-item">NLP</span>
+        </div>
+      </section>
+
+      <section class="console" aria-label="Emotion analyzer">
+
+        <div class="orb-stage" aria-hidden="true">
+          <div class="orb-glow"></div>
+
+          <div class="orb">
+            <span class="orb-core">
+              <span class="orb-emoji" id="orbEmoji">✎</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-panel">
+          <label class="eyebrow" for="textInput">INPUT</label>
+
+          <textarea
+            id="textInput"
+            maxlength="2000"
+            aria-describedby="charWrap errorMsg"
+            placeholder="Write a sentence and let it speak for itself&#10;— e.g. “I can't believe we actually pulled this off.”"
+          ></textarea>
+
+          
+<div class="sample-buttons">
+  <button class="sample-btn" data-text="I feel happy because today everything is going well and I am surrounded by people who genuinely care about me.">😊 Happy</button>
+
+  <button class="sample-btn" data-text="I feel sad because I miss my friends and family, and sometimes I wish things could be like before.">😢 Sadness</button>
+
+  <button class="sample-btn" data-text="i feel over the moon when the guy i liked started a class cbc read more href http jazzyboy">❤️ Love</button>
+
+  <button class="sample-btn" data-text="I feel angry because people keep ignoring my opinions, and nobody seems to understand how much their actions hurt me.">😠 Anger</button>
+
+  <button class="sample-btn" data-text="I feel scared because I am alone in this dark place, hearing strange noises and wondering what might happen next.">😨 Fear</button>
+
+  <button class="sample-btn" data-text="I feel surprised because my best friend suddenly appeared at my door with a beautiful gift and an unexpected birthday celebration.">😲 Surprise</button>
+</div>
+
+
+          <div class="input-footer">
+            <span class="char-count" id="charWrap">
+              <span id="charCount">0</span> / 2000
+            </span>
+
+            <div class="btns">
+              <button
+                type="button"
+                id="clearBtn"
+                class="btn-ghost"
+                hidden
+              >
+                Clear
+              </button>
+
+              <button
+                type="button"
+                id="analyzeBtn"
+                class="btn-primary"
+                disabled
+              >
+                <span class="btn-label">Read the mood</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="error-msg" id="errorMsg" role="alert" hidden></p>
+        </div>
+      </section>
+
+      <section
+        class="result"
+        id="resultSection"
+        aria-live="polite"
+        hidden
+      >
+        <div class="reveal">
+          <span class="eyebrow">PREDICTED EMOTION</span>
+
+          <div class="reveal-main">
+            <span
+              class="reveal-emoji"
+              id="emotionEmoji"
+              aria-hidden="true"
+            ></span>
+
+            <h2 id="emotionWord"></h2>
+          </div>
+
+          <div class="conf">
+            <span class="confidence-mono" id="confidenceText"></span>
+
+            <div class="meter">
+              <span id="confFill"></span>
+            </div>
+
+            <p class="note">
+              Model confidence is the estimated probability for the selected
+              label. It is not proof that the text expresses that emotion.
+            </p>
+          </div>
+
+          <blockquote class="echoed-text" id="echoedText"></blockquote>
+        </div>
+
+        <div class="breakdown">
+          <span class="eyebrow">FULL DISTRIBUTION</span>
+
+          <div class="bars" id="barsContainer"></div>
+
+          <p class="note">
+            The orb is painted from these six probabilities.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footbar">
+      <span id="serverStatusText" role="status">
+        Connecting to model…
+      </span>
+
+      <span class="footbar-hint">⌘ / Ctrl + Enter to analyze</span>
+
+      <span class="footer-credit">
+        Designed & built by <strong>Burhan Arshad</strong>
+      </span>
+    </footer>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
