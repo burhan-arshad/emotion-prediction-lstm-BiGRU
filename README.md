@@ -1,4 +1,4 @@
-# Moodline — Emotion Detection Using BiGRU
+
 
 Type a sentence and a **Bidirectional GRU** model predicts one of six emotion categories: `sadness`, `joy`, `love`, `anger`, `fear`, `surprise`. The interface shows the predicted label, the model's confidence, and the full six-way probability distribution.
 
